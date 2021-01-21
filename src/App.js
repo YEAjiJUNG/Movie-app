@@ -8,6 +8,8 @@ class App extends Component {
     isLoading: true,
     movies: []
   }
+  //componentDidMount함수가 끝날 때까지 시간이 걸릴 수 있다고 해야함 -> async
+  // 뭘 기다려야 해? await뒤 , axios 끝날 때까지 기다렸다가 계속해라
   getMovies = async () => {
     const {data: {data: {movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");
     this.setState({movies, isLoading: false});
@@ -16,7 +18,7 @@ class App extends Component {
     this.getMovies();
   }
   render() {
-    const { isLoading, movies} = this.state;
+    const {isLoading, movies} = this.state;
     return (
       <section className="container">
         { isLoading ? (
